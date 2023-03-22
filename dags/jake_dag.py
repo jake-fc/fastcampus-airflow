@@ -11,7 +11,7 @@ from airflow.utils.dates import days_ago
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'email': ['airflow@example.com'],
+    'email': ['jake@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
@@ -31,9 +31,9 @@ default_args = {
     # 'trigger_rule': 'all_success'
 }
 dag = DAG(
-    'tutorial',
+    'jake',
     default_args=default_args,
-    description='A simple tutorial DAG',
+    description='This is sample dags haha',
     schedule_interval=timedelta(days=1),
     start_date=days_ago(2),
     tags=['example'],
