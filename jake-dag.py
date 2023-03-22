@@ -52,6 +52,7 @@ t2 = BashOperator(
     depends_on_past=False,
     bash_command='sleep 5',
     retries=3,
+    queue="celery",
     dag=dag,
 )
 dag.doc_md = __doc__
@@ -75,6 +76,7 @@ t3 = BashOperator(
     task_id='templated',
     depends_on_past=False,
     bash_command=templated_command,
+    queue="celery",
     params={'my_param': 'Parameter I passed in'},
     dag=dag,
 )
