@@ -44,6 +44,7 @@ with dag:
     load_s3_file_to_mysql_task = PythonOperator(
         task_id='load_s3_file_to_mysql',
         python_callable=load_s3_file_to_mysql,
+        queue="celery",
         provide_context=True
     )
 
