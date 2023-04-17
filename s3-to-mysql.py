@@ -26,7 +26,6 @@ s3_to_mysql_task = S3ToMySqlOperator(
     mysql_conn_id='mysql_conn',
     mysql_table='upbit_api',
     queue="celery",
-    local_infile=True,
     dag=dag,
 )
 
