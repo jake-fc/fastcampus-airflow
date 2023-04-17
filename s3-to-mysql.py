@@ -24,6 +24,7 @@ s3_to_mysql_task = S3ToMySqlOperator(
     s3_source_key='jake-api/api/upbit-api/year={{ ds_nodash[:4] }}/month={{ ds_nodash[4:6] }}/day={{ ds_nodash[6:8] }}/hour={{ ds_nodash[8:10] }}/data.txt',
     mysql_conn_id='mysql_conn',
     mysql_table='upbit_api',
+    queue="celery",
     dag=dag,
 )
 
