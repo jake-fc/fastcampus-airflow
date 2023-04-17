@@ -25,6 +25,11 @@ s3_to_mysql_task = S3ToMySqlOperator(
     s3_source_key='s3://jake-api/api/upbit-api/year=2023/month=04/day=13/hour=12/ls.s3.0674f7c7-8b73-4ec5-81c2-2b991ed4ca31.2023-04-13T12.29.part13.txt',
     mysql_conn_id='mysql_conn',
     mysql_table='upbit_api',
+    mysql_duplicate_key_handling='IGNORE',
+    mysql_extra_options="""
+            FIELDS TERMINATED BY ','
+            IGNORE 1 LINES
+            """,
     queue="celery",
     dag=dag,
 )
