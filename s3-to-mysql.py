@@ -22,9 +22,9 @@ dag = DAG(
 s3_to_mysql_task = S3ToMySqlOperator(
     task_id='s3_to_mysql',
     s3_bucket='jake-api',
-    s3_key='api/upbit-api/year={{ ds_nodash[:4] }}/month={{ ds_nodash[4:6] }}/day={{ ds_nodash[6:8] }}/hour={{ ds_nodash[8:10] }}/data.txt',
+    s3_source_key='api/upbit-api/year={{ ds_nodash[:4] }}/month={{ ds_nodash[4:6] }}/day={{ ds_nodash[6:8] }}/hour={{ ds_nodash[8:10] }}/data.txt',
     mysql_conn_id='mysql_conn',
-    table='upbit_api',
+    mysql_table='upbit_api',
     dag=dag,
 )
 
