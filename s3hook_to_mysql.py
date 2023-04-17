@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-from airflow.providers.mysql.operators.mysql import MySqlOperator, MySqlHook
+from airflow.providers.mysql.operators.mysql import MySqlOperator
+from airflow.providers.mysql.hooks.mysql import MySqlHook
 from airflow.operators.python_operator import PythonOperator
 import pandas as pd
 import io
