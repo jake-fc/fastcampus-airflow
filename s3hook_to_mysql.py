@@ -33,7 +33,7 @@ def load_s3_file_to_mysql(**context):
 
     # S3 파일을 pandas dataframe으로 읽어들인다.
     s3_file = s3_object.get()['Body'].read().decode('utf-8')
-    df = pd.read_csv(io.StringIO()(s3_file), delimiter=',')
+    df = pd.read_csv(io.StringIO(s3_file), delimiter=',')
 
     # MySQL hook를 사용하여 RDS MySQL에 데이터를 적재한다.
     mysql_hook = MySqlHook(mysql_conn_id=mysql_conn_id)
