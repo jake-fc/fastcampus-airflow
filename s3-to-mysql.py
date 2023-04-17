@@ -1,6 +1,6 @@
 from airflow import DAG
 from airflow.providers.mysql.operators.mysql import MySqlOperator
-from airflow.providers.amazon.aws.operators.s3_to_mysql import S3ToMySqlOperator
+from airflow.providers.mysql.transfers.s3_to_mysql import S3ToMySqlOperator
 from datetime import datetime, timedelta
 
 default_args = {
