@@ -43,7 +43,7 @@ def insert_s3_data_bulk(**context):
     for cleaned_s3_file in cleaned_s3_files:
         s3_object = s3_hook.get_key(cleaned_s3_file, s3_bucket_name)
         s3_file = s3_object.get()['Body'].read().decode('utf-8')
-        json_lists = [json.loads(json_str) for json_str in s3_file.strip().split('\n')]
+        json_lists += [json.loads(json_str) for json_str in s3_file.strip().split('\n')]
 
     print("Done 2")    
     
