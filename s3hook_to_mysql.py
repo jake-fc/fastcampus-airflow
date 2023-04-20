@@ -47,7 +47,8 @@ def insert_s3_data_bulk(**context):
         json_lists = [json.loads(json_str) for json_str in s3_file.strip().split('\n')]
 
     print("Done 2")    
-
+    
+    del_columns = ["s3_bucket","idx_name","s3_path","@version","@timestamp"]
     for json_list in json_lists:
         for del_column in del_columns:
             json_list.pop(del_column)
