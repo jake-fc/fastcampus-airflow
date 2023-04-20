@@ -6,6 +6,7 @@ from airflow.providers.mysql.hooks.mysql import MySqlHook
 from airflow.operators.python_operator import PythonOperator
 import pandas as pd
 import io
+import json
 
 default_args = {
     'owner': 'jake',
@@ -30,6 +31,7 @@ s3_conn_id = 'aws_default'
 
     
 def insert_s3_data_bulk(**context):
+    s3_hook = S3Hook(aws_conn_id=s3_conn_id)
     s3_files = s3_hook.list_keys(s3_bucket_name)
 
     cleaned_s3_files = []
