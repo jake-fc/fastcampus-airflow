@@ -61,7 +61,7 @@ with dag:
     # S3 파일을 MySQL에 적재하는 PythonOperator
     load_s3_file_to_mysql_task = PythonOperator(
         task_id='load_s3_file_to_mysql',
-        python_callable=load_s3_file_to_mysql,
+        python_callable=insert_s3_data_bulk,
         queue="celery",
         provide_context=True
     )
