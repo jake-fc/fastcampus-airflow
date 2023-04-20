@@ -23,7 +23,6 @@ dag = DAG(
 )
 
 s3_bucket_name = 'jake-api'
-s3_key = 'api/upbit-api/year=2023/month=04/day=13/hour=12/ls.s3.0674f7c7-8b73-4ec5-81c2-2b991ed4ca31.2023-04-13T12.29.part13.txt'
 mysql_table_name = 'upbit_api'
 mysql_conn_id = 'mysql_conn'
 s3_conn_id = 'aws_default'
