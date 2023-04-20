@@ -27,19 +27,35 @@ mysql_table_name = 'upbit_api'
 mysql_conn_id = 'mysql_conn'
 s3_conn_id = 'aws_default'
 
-def load_s3_file_to_mysql(**context):
-    # S3 hook를 사용하여 S3 파일을 읽어들인다.
-    s3_hook = S3Hook(aws_conn_id=s3_conn_id)
-    s3_object = s3_hook.get_key(s3_key, s3_bucket_name)
 
-    # S3 파일을 pandas dataframe으로 읽어들인다.
-    s3_file = s3_object.get()['Body'].read().decode('utf-8')
-    df = pd.read_csv(io.StringIO(s3_file), delimiter=',')
+    
+def insert_s3_data_bulk(**context):
+    s3_files = s3_hook.list_keys(s3_bucket_name)
 
-    # MySQL hook를 사용하여 RDS MySQL에 데이터를 적재한다.
-    mysql_hook = MySqlHook(mysql_conn_id=mysql_conn_id)
-    mysql_hook.run(f"TRUNCATE TABLE {mysql_table_name}")
-    mysql_hook.insert_rows(table=mysql_table_name, rows=df.to_records(index=False).tolist())
+    cleaned_s3_files = []
+    for s3_file in s3_files :
+        if "year=2023" in s3_file:
+            cleaned_s3_files.append(s3_file)
+
+    print("Done 1")
+
+    for cleaned_s3_file in cleaned_s3_files:
+        s3_object = s3_hook.get_key(cleaned_s3_file, s3_bucket_name)
+        s3_file = s3_object.get()['Body'].read().decode('utf-8')
+        json_lists = [json.loads(json_str) for json_str in s3_file.strip().split('\n')]
+
+    print("Done 2")    
+
+    for json_list in json_lists:
+        for del_column in del_columns:
+            json_list.pop(del_column)
+
+    print("Done 3")
+
+    for json_list in json_lists:
+        df = pd.DataFrame.from_dict([json_list])
+        mysql_hook = MySqlHook(mysql_conn_id=mysql_conn_id)
+        mysql_hook.insert_rows(table=mysql_table_name, replace=True, rows=df.values.tolist())
 
 with dag:
     # S3 파일을 MySQL에 적재하는 PythonOperator
@@ -50,4 +66,4 @@ with dag:
         provide_context=True
     )
 
-load_s3_file_to_mysql_task
+insert_s3_data_bulk
