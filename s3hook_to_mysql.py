@@ -23,6 +23,7 @@ dag = DAG(
     's3_to_mysql_v2',
     default_args=default_args,
     schedule_interval=timedelta(hours=1),
+    catchup=True
 )
 
 s3_bucket_name = 'jake-api'
@@ -75,6 +76,5 @@ with dag:
         task_id='load_s3_file_to_mysql',
         python_callable=insert_s3_data_bulk,
         queue="celery",
-        provide_context=True,
-        catchup=True
+        provide_context=True
     )
