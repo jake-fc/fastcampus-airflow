@@ -32,6 +32,7 @@ s3_conn_id = 'aws_default'
 def insert_s3_data_bulk(**context):
     s3_hook = S3Hook(aws_conn_id=s3_conn_id)
     s3_files = s3_hook.list_keys(bucket_name=s3_bucket_name, prefix = s3_prefix)
+    s3_prefix='api/upbit-api/year={{ ds_nodash[:4] }}/month={{ ds_nodash[4:6] }}/day={{ ds_nodash[6:8] }}/hour={{ ds_nodash[8:10] }}/'
 
     json_lists = []
     cleaned_s3_files = []
