@@ -34,6 +34,9 @@ def insert_s3_data_bulk(**context):
     s3_prefix='api/upbit-api/year={{ ds_nodash[:4] }}/month={{ ds_nodash[4:6] }}/day={{ ds_nodash[6:8] }}/hour={{ ds_nodash[8:10] }}/'
     s3_files = s3_hook.list_keys(bucket_name=s3_bucket_name, prefix = s3_prefix)
 
+    print(s3_prefix)
+    print(s3_files)
+    
     json_lists = []
     cleaned_s3_files = []
     for s3_file in s3_files :
