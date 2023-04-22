@@ -75,5 +75,6 @@ with dag:
         task_id='load_s3_file_to_mysql',
         python_callable=insert_s3_data_bulk,
         queue="celery",
-        provide_context=True
+        provide_context=True,
+        catchup=True
     )
