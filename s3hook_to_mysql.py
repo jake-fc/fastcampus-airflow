@@ -19,7 +19,7 @@ default_args = {
 dag = DAG(
     's3_to_mysql_v2',
     default_args=default_args,
-    schedule_interval=timedelta(days=1),
+    schedule_interval=timedelta(hour=1),
 )
 
 s3_bucket_name = 'jake-api'
