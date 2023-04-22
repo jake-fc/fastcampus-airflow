@@ -22,7 +22,7 @@ default_args = {
 dag = DAG(
     's3_to_mysql_batch',
     default_args=default_args,
-    schedule_interval=timedelta(hours=1),
+    schedule_interval=0 * * * *,
     #schedule_interval='30 * * * *',
     catchup=True
 )
