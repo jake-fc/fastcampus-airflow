@@ -72,7 +72,6 @@ with dag:
     load_s3_file_to_mysql_task = PythonOperator(
         task_id='load_s3_file_to_mysql',
         python_callable=insert_s3_data_bulk,
-        provide_context=True,
         queue="celery",
         provide_context=True
     )
