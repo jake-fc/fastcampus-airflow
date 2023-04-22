@@ -26,7 +26,8 @@ s3_bucket_name = 'jake-api'
 mysql_table_name = 'upbit_api'
 mysql_conn_id = 'mysql_conn'
 s3_conn_id = 'aws_default'
-
+year={{ ds_nodash[:4] }}
+print('year=',year)
 
     
 def insert_s3_data_bulk(**context):
