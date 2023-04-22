@@ -30,8 +30,7 @@ s3_bucket_name = 'jake-api'
 mysql_table_name = 'upbit_api'
 mysql_conn_id = 'mysql_conn'
 s3_conn_id = 'aws_default'
-year='{{ ds_nodash[:4] }}'
-print('year=',year)
+ds_nodash = '{{ ds_nodash }}'
 
     
 def insert_s3_data_bulk(**context):
@@ -74,6 +73,7 @@ with dag:
     load_s3_file_to_mysql_task = PythonOperator(
         task_id='load_s3_file_to_mysql',
         python_callable=insert_s3_data_bulk,
+        op_args=[ds_nodash],
         queue="celery",
         provide_context=True
     )
