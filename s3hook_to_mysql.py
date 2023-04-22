@@ -4,6 +4,10 @@ from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from airflow.providers.mysql.operators.mysql import MySqlOperator
 from airflow.providers.mysql.hooks.mysql import MySqlHook
 from airflow.operators.python_operator import PythonOperator
+
+from airflow.models import Variable
+from airflow.utils.dates import days_ago
+
 import pandas as pd
 import io
 import json
