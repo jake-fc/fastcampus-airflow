@@ -24,7 +24,6 @@ dag = DAG(
     description='S3에서 데이터를 로드한 후 MySQL로 데이터를 인서트한다',
     default_args=default_args,
     schedule_interval='0 * * * *',
-    #schedule_interval='30 * * * *',
     catchup=True
 )
 
